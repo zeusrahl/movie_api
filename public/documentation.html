@@ -17,6 +17,92 @@
             <p>
                 This project was to build an API to help organize a set of data about movies. Mainly, it will revolve around users interacting movie names, directors, and genres. Additionally, users will be able to sign up, update their personal information, and create a list of their favorite movies.
             </p>
+            <div>
+                <!-- table of API requests -->
+                <table>
+                    <!-- header -->
+                    <thead>
+                        <th>Request</th>
+                        <th>Method</th>
+                        <th>URL</th>
+                        <th>Response</th>
+                    </thead>
+                    <!-- body -->
+                    <tbody>
+                        <!-- Return a list of ALL movies to the user -->
+                        <tr>
+                            <td>List all movies to users</td>
+                            <td>GET</td>
+                            <td>/movies</td>
+                            <td>List of all available movies with image and title</td>
+                        </tr>
+
+                        <!-- Return specified data: description, genre, director, image URL, featured or not -->
+                        <tr>
+                            <td>Return data of requested movie</td>
+                            <td>GET</td>
+                            <td>/movies/[movie title]</td>
+                            <td>A JSON object with movie title, cover art, description, genre, featured film, director and actors</td>
+                        </tr>
+
+                        <!-- Return data about a genre (description) by name/title (e.g., "Thriller") -->
+                        <tr>
+                            <td>List of movies by genre</td>
+                            <td>GET</td>
+                            <td>/movies/[genre]</td>
+                            <td>Returns a list of movies that satisfy the requested genre</td>
+                        </tr>
+
+                        <!-- Return data about a director (bio, birth year, death year) by name -->
+                        <tr>
+                            <td>Return director information</td>
+                            <td>GET</td>
+                            <td>/directors/[director name]</td>
+                            <td>Gives information about requested director with respect to their bio, birth day, death year (if deceased), and featured work</td>
+                        </tr>
+
+                        <!-- Allow new users to register -->
+                        <tr>
+                            <td>Register a new user</td>
+                            <td>POST</td>
+                            <td>/users</td>
+                            <td>Add a new user to be registered</td>
+                        </tr>
+
+                        <!-- Allow users to update their user info (username) -->
+                        <tr>
+                            <td>Update a username</td>
+                            <td>PUT</td>
+                            <td>/users/[user-name]</td>
+                            <td>Update the username of a user</td>
+                        </tr>
+
+                        <!-- Allow users to add a movie to their list of favorites (showing only a text that a movie has been added--more on this later) -->
+                        <tr>
+                            <td>Users add movie to their favorites List</td>
+                            <td>POST</td>
+                            <td>/users/[user-name]/movies/[movieID]</td>
+                            <td>Add a movie to User's list of movies</td>
+                        </tr>
+
+                        <!-- Allow users to remove a movie from their list of favorites (showing only a text that a move has been removed--more on this later) -->
+                        <tr>
+                            <td>Delete movie from user's List</td>
+                            <td>DELETE</td>
+                            <td>/users/[user-name]/movies/[movieID]</td>
+                            <td></td>
+                        </tr>
+
+                        <!-- Allow existing users to dergister (showing only a text that a user email has been removed--more on this later) -->
+                        <tr>
+                            <td>Deregister an account</td>
+                            <td>DELETE</td>
+                            <td>/users/[user-name]</td>
+                            <td>Username will be deleted from data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </main>
     </body>
 </html>
