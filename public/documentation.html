@@ -7,6 +7,19 @@
         <!-- need some fonts -->
         <!-- need a normalization -->
         <!-- need styling -->
+        <style>
+            table {
+                width: 100%;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            ul {
+                list-style: none;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -22,10 +35,12 @@
                 <table>
                     <!-- header -->
                     <thead>
-                        <th>Request</th>
-                        <th>Method</th>
-                        <th>URL</th>
-                        <th>Response</th>
+                        <tr>
+                            <th>Request</th>
+                            <th>Method</th>
+                            <th>URL</th>
+                            <th>Response</th>
+                        </tr>
                     </thead>
                     <!-- body -->
                     <tbody>
@@ -42,7 +57,22 @@
                             <td>Return data of requested movie</td>
                             <td>GET</td>
                             <td>/movies/[movie title]</td>
-                            <td>A JSON object with movie title, cover art, description, genre, featured film, director and actors</td>
+                            <td>
+                                A JSON object with movie title, cover art, description, genre, featured film, director and actors
+                                <ul>
+                                    <li>title: 'The Princess Bride',</li>
+                                    <li>description: "A fairy tale story about a beautiful young woman and her true love. They must battle the evils of their land and overcome the obsticles that keep them seperated.",</li>
+                                    <li>genre: Romantic Comedy,</li>
+                                    <li>director: Rob Reiner{
+                                        <ul>
+                                            <li>bio: "Reiner started acting in the 1960's. In the 1980's he began a successful directing career, directing successful movies such as <em>This is Spinal Tap</em>, <em>When Harry Met Sally</em>, and <em>A Few Good Men</em>.",</li>
+                                            <li>birth: March 6, 1947,</li>
+                                            <li>death: Not applicable ,</li>
+                                        </ul>
+                                    },</li>
+                                    <li>image: <a href='url'>https://en.wikipedia.org/wiki/The_Princess_Bride_(film)#/media/File:Princess_bride.jpg</a></li>
+                                </ul>
+                            </td>
                         </tr>
 
                         <!-- Return data about a genre (description) by name/title (e.g., "Thriller") -->
@@ -90,7 +120,7 @@
                             <td>Delete movie from user's List</td>
                             <td>DELETE</td>
                             <td>/users/[user-name]/movies/[movieID]</td>
-                            <td></td>
+                            <td>A confirmation that a movie was deleted from User's favorite list</td>
                         </tr>
 
                         <!-- Allow existing users to dergister (showing only a text that a user email has been removed--more on this later) -->
