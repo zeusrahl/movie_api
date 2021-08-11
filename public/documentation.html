@@ -56,13 +56,18 @@
                         <tr>
                             <td>Return data of requested movie</td>
                             <td>GET</td>
-                            <td>/movies/[movie title]</td>
+                            <td>/movies/:Title</td>
                             <td>
                                 A JSON object with movie title, cover art, description, genre, featured film, director and actors
                                 <ul>
                                     <li>title: 'The Princess Bride',</li>
                                     <li>description: "A fairy tale story about a beautiful young woman and her true love. They must battle the evils of their land and overcome the obsticles that keep them seperated.",</li>
-                                    <li>genre: Romantic Comedy,</li>
+                                    <li>genre: 
+                                        <ul>
+                                            <li>Name: 'Romantic Comedy'</li>
+                                            <li>Description: 'A story where the protagonist go through a series of comedic trials before finally falling in love.'</li>
+                                        </ul>
+                                    </li>
                                     <li>director: Rob Reiner{
                                         <ul>
                                             <li>bio: "Reiner started acting in the 1960's. In the 1980's he began a successful directing career, directing successful movies such as <em>This is Spinal Tap</em>, <em>When Harry Met Sally</em>, and <em>A Few Good Men</em>.",</li>
@@ -79,7 +84,7 @@
                         <tr>
                             <td>List of movies by genre</td>
                             <td>GET</td>
-                            <td>/movies/[genre]</td>
+                            <td>/movies/genre/:Name</td>
                             <td>Returns a list of movies that satisfy the requested genre</td>
                         </tr>
 
@@ -99,11 +104,19 @@
                             <td>Add a new user to be registered</td>
                         </tr>
 
+                        <!-- Get all users -->
+                        <tr>
+                            <td>Pull up a list of users</td>
+                            <td>GET</td>
+                            <td>/users</td>
+                            <td>Pulls up all Users data</td>
+                        </tr>
+
                         <!-- Allow users to update their user info (username) -->
                         <tr>
                             <td>Update a username</td>
                             <td>PUT</td>
-                            <td>/users/[user-name]</td>
+                            <td>/users/:Username</td>
                             <td>Update the username of a user</td>
                         </tr>
 
