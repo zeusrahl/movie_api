@@ -44,6 +44,13 @@
                     </thead>
                     <!-- body -->
                     <tbody>
+                        <!-- Return basic page -->
+                        <tr>
+                            <td>Call the homepage</td>
+                            <td>GET</td>
+                            <td>'/'</td>
+                            <td>Returns with a welcome message: 'We are working with our Movie Database!'</td>
+                        </tr>
                         <!-- Return a list of ALL movies to the user -->
                         <tr>
                             <td>List all movies to users</td>
@@ -80,7 +87,7 @@
                             </td>
                         </tr>
 
-                        <!-- Return data about a genre (description) by name/title (e.g., "Thriller") -->
+                        <!-- Return Movies that match a given Genre by name (e.g., "Thriller") -->
                         <tr>
                             <td>List of movies by genre</td>
                             <td>GET</td>
@@ -92,8 +99,19 @@
                         <tr>
                             <td>Return director information</td>
                             <td>GET</td>
-                            <td>/directors/[director name]</td>
-                            <td>Gives information about requested director with respect to their bio, birth day, death year (if deceased), and featured work</td>
+                            <td>/directors/:Name</td>
+                            <td>
+                                Gives information about requested director with respect to their bio, birth day, death year (if deceased), and featured work:
+                                <ul>
+                                    <li>director: Rob Reiner{
+                                        <ul>
+                                            <li>bio: "Reiner started acting in the 1960's. In the 1980's he began a successful directing career, directing successful movies such as <em>This is Spinal Tap</em>, <em>When Harry Met Sally</em>, and <em>A Few Good Men</em>.",</li>
+                                            <li>birth: March 6, 1947,</li>
+                                            <li>death: Not applicable ,</li>
+                                        </ul>
+                                    },</li>
+                                </ul>
+                            </td>
                         </tr>
 
                         <!-- Allow new users to register -->
@@ -101,7 +119,15 @@
                             <td>Register a new user</td>
                             <td>POST</td>
                             <td>/users</td>
-                            <td>Add a new user to be registered</td>
+                            <td>
+                                Add a new user to be registered. Returned data will result with a user that already exists, or with the following array:
+                                <ul>
+                                    <li>Username: user1</li>
+                                    <li>Password: password1</li>
+                                    <li>Email: madeupemail1@gmail.com</li>
+                                    <li>Birthday: 01/01/2001</li>
+                                </ul>
+                            </td>
                         </tr>
 
                         <!-- Get all users -->
@@ -110,6 +136,14 @@
                             <td>GET</td>
                             <td>/users</td>
                             <td>Pulls up all Users data</td>
+                        </tr>
+
+                        <!-- Get a single user by user name -->
+                        <tr>
+                            <td>Pull a single user</td>
+                            <td>GET</td>
+                            <td>/users/:Username</td>
+                            <td>Pulls up all Users data, including an array of their favorite movies</td>
                         </tr>
 
                         <!-- Allow users to update their user info (username) -->
@@ -124,15 +158,15 @@
                         <tr>
                             <td>Users add movie to their favorites List</td>
                             <td>POST</td>
-                            <td>/users/[user-name]/movies/[movieID]</td>
-                            <td>Add a movie to User's list of movies</td>
+                            <td>/users/:Username/movies/:MovieID</td>
+                            <td>Add a single movie to User's list of favorite movies</td>
                         </tr>
 
                         <!-- Allow users to remove a movie from their list of favorites (showing only a text that a move has been removed- -more on this later) -->
                         <tr>
                             <td>Delete movie from user's List</td>
                             <td>DELETE</td>
-                            <td>/users/[user-name]/movies/[movieID]</td>
+                            <td>/users/:Username/movies/:MovieID</td>
                             <td>A confirmation that a movie was deleted from User's favorite list</td>
                         </tr>
 
@@ -140,7 +174,7 @@
                         <tr>
                             <td>Deregister an account</td>
                             <td>DELETE</td>
-                            <td>/users/[user-name]</td>
+                            <td>/users/:Username</td>
                             <td>Username will be deleted from data</td>
                         </tr>
                     </tbody>
