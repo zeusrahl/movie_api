@@ -151,7 +151,7 @@ app.put('/users/:Username', (req, res) => {
         Birthday: req.body.Birthday,
       },
     },
-  { new: true }, // This line makes sure that the updated document is returned
+  { new: true}, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
     if (err) {
       console.error(err);
@@ -195,24 +195,8 @@ app.delete('/users/:Username/movies/:MovieID', (req,res) => {
 });
 
 // Deregister user (/users/:Username) DELETE
-// app.delete('/users/:Username', (req, res) => {
-//     Users.findOneAndRemove({ Username: req.params.Username})
-//     .then((user) => {
-//       if (!user) {
-//         res.status(400).send(req.params.Username + ' was not found');
-//       } else {
-//         res.status(200).send(req.params.Username + ' was deleted.);')
-//       }
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send('Error: ' + err);
-//     });
-// });
-
-// Deregister user with UserID (/users/:UserID) DELETE
-app.delete('/users/:UserID', (req, res) => {
-    Users.findOneAndRemove({ _id: req.params.UserID})
+app.delete('/users/:Username', (req, res) => {
+    Users.findOneAndRemove({ Username: req.params.Username})
     .then((user) => {
       if (!user) {
         res.status(400).send(req.params.Username + ' was not found');
