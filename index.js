@@ -20,11 +20,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // Return that we are working in the Movie_API
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 app.get('/', (req, res) => {
   res.send('We are working with our Movie Database!')
 })
 // Return list of movies (/movies) GET
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
       .then((movies) => {
         res.status(201).json(movies);
@@ -36,7 +40,7 @@ app.get('/movies', (req, res) => {
 });
 
 // Return JSON data for specified movie (/movies/[movie title]) GET
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ Title: req.params.Title})
       .then((movie) => {
         res.json(movie);
@@ -48,7 +52,7 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // Return movies with given Genre (/movies/[genre]) GET
-app.get('/movies/genre/:Name', (req, res) => {
+app.get('/movies/genre/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find({ 'Genre.Name': req.params.Name })
   .then((movie) => {
     res.json(movie);
@@ -60,7 +64,7 @@ app.get('/movies/genre/:Name', (req, res) => {
 });
 
 // Return director info (/directors/[director name]) GET
-app.get('/director/:Name', (req, res) => {
+app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ 'Director.Name': req.params.Name })
     .then((movie) => {
       res.status(201).json(movie.Director);
@@ -107,7 +111,7 @@ app.post('/users', (req, res) => {
 });
 
 // Get all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.find().populate('FavoriteMovies','Title')
         .then((users) => {
             res.status(201).json(users);;
@@ -119,7 +123,7 @@ app.get('/users', (req, res) => {
 })
 
 // Get a user by username
-app.get('/users/:Username', (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({Username: req.params.Username}).populate('FavoriteMovies','Title')
     .then((user) => {
       res.json(user);
@@ -141,7 +145,7 @@ app.get('/users/:Username', (req, res) => {
   (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, 
     { 
       $set: {
@@ -163,7 +167,7 @@ app.put('/users/:Username', (req, res) => {
 });
 
 // Add movie to User's list of favorites
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username}, {
       $push: { FavoriteMovies: req.params.MovieID}
     },
@@ -179,7 +183,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 });
 
 // Delete movie from User's Favorites (/users/[user-name]/movies/[movieID]) DELETE
-app.delete('/users/:Username/movies/:MovieID', (req,res) => {
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req,res) => {
   Users.findOneAndUpdate({ Username: req.params.Username}, {
     $pull: { FavoriteMovies: req.params.MovieID}
   },
@@ -195,13 +199,13 @@ app.delete('/users/:Username/movies/:MovieID', (req,res) => {
 });
 
 // Deregister user (/users/:Username) DELETE
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username})
     .then((user) => {
       if (!user) {
         res.status(400).send(req.params.Username + ' was not found');
       } else {
-        res.status(200).send(req.params.Username + ' was deleted.);')
+        res.status(200).send(req.params.Username + ' was deleted.');
       }
     })
     .catch((err) => {
