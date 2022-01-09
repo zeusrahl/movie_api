@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Return that we are working in the Movie_API
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://localhost:4200', 'http://testsite.com', 'http://zeusrahl.github.io/myFlix-Angular-client/'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://localhost:4200', 'http://testsite.com', 'https://zeusrahl.github.io/myFlix-Angular-client/'];
 
 app.use(cors({
   origin: (origin, callback) => {
